@@ -38,7 +38,7 @@ public class GUI : MonoBehaviour
     /// <returns>if game end or not</returns>
     public bool AddPoint(bool isPlayer1Wall)
     {
-        if (isPlayer1Wall) // Add a player a point
+        if (!isPlayer1Wall) // Add a player a point
             Pl1Points++;
         else
             Pl2Points++;
