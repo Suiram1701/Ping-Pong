@@ -6,8 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // Set variables
-    private readonly float MaxHeight = 5f; //4.023f
-    private readonly float MinHeight = -4.861273f; //-6.711273f
+    private readonly float MaxHeight = 5.8f;
+    private readonly float MinHeight = -5.8f;
+    public float PlayerSpeed;
     public KeyCode KeyUp;
     public KeyCode KeyDown;
 
@@ -28,12 +29,12 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyUp))
         {
             if (!(transform.position.y >= MaxHeight))
-                transform.position = new Vector2(transform.position.x, transform.position.y + 0.25f);
+                transform.position = new Vector2(transform.position.x, transform.position.y + PlayerSpeed);
         }
         else if (Input.GetKey(KeyDown))
         {
             if(!(transform.position.y <= MinHeight))
-                transform.position = new Vector2(transform.position.x, transform.position.y - 0.25f);
+                transform.position = new Vector2(transform.position.x, transform.position.y - PlayerSpeed);
         }
     }
 }

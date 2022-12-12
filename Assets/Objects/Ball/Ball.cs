@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity;
+using System.Threading;
 
-public class ball : MonoBehaviour
+public class Ball : MonoBehaviour
 {
     // Reference to other objects
     public GUI GUI;
@@ -20,7 +22,6 @@ public class ball : MonoBehaviour
     private void Start()
     {
         // Random start vector
-        System.Random Rnd = new System.Random();
         Direction = UnityEngine.Random.Range(0.50f, 0.85f);
         isTop = UnityEngine.Random.Range(0, 2) == 0;
 
@@ -54,7 +55,7 @@ public class ball : MonoBehaviour
                 gameObject.gameObject.SetActive(false);
             else
             {
-                isRight = collision.gameObject.CompareTag("Pl2Wall");
+                isRight = !collision.gameObject.CompareTag("Pl2Wall");
                 Start();
             }
         }
@@ -70,5 +71,7 @@ public class ball : MonoBehaviour
             isRight = !isRight;
         else                       // Bounce from top to bottom (or reverse)
             isTop = !isTop;
+
+        Direction = UnityEngine.Random.Range(Direction >= 0.45f ? 0.8f : 1f, Direction <= 0.90 ? 1.2f : 1f) * Direction;
     }
 }
