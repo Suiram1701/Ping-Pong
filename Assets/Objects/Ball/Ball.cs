@@ -73,5 +73,6 @@ public class Ball : MonoBehaviour
             isTop = !isTop;
 
         Direction = UnityEngine.Random.Range(Direction >= 0.45f ? 0.8f : 1f, Direction <= 0.90 ? 1.2f : 1f) * Direction;
+        Debug.Log(Direction);
     }
 }
