@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,11 +12,16 @@ public class GUI : MonoBehaviour
     // Reference to other objects
     public Text Points;
     public Text Panel;
+    public Player Pl1;
+    public Player Pl2;
+    public Ball Ball;
+    public Button MenuBtn;
 
     // Init variables
     public int MaxPoints;
     private int Pl1Points;
     private int Pl2Points;
+    private bool Menu = false;
 
     /// <summary>
     /// Start is called before the first frame update
@@ -24,6 +31,7 @@ public class GUI : MonoBehaviour
         Pl1Points = 0;
         Pl2Points = 0;
         Points.text = "0 : 0";
+        Panel.text = "";
     }
 
     /// <summary>
@@ -31,7 +39,15 @@ public class GUI : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Panel.text = Menu ? "Pause" : "";
+            Ball.Speed = Menu ? 0f : 0.4f;
+            Pl1.PlayerSpeed = Menu ? 0f : 0.25f;
+            Pl2.PlayerSpeed = Menu ? 0f : 0.25f;
+            MenuBtn.gameObject.SetActive(Menu);
+            Menu = !Menu;
+        }
     }
 
     /// <summary>
@@ -48,18 +64,27 @@ public class GUI : MonoBehaviour
 
         Points.text = $"{Pl1Points} : {Pl2Points}"; // Update point display
 
-        if (Pl1Points >= MaxPoints) // Check if a player Win
-        {
+        if (Pl1Points >= MaxPoints) // Check if a player1 Win
             SetPanel(1);
-            return false;
-        }
-        else if (Pl2Points >= MaxPoints)
-        {
+        else if (Pl2Points >= MaxPoints) // Check if a player1 Win
             SetPanel(2);
-            return false;
-        }
         else
             return true;
+
+        ReturnLobby();
+        return false;
+    }
+
+    /// <summary>
+    /// Return to lobby with a delay
+    /// </summary>
+    public async void ReturnLobby()
+    {
+        await Task.Run(() =>
+        {
+            Thread.Sleep(2000);
+            SceneManager.LoadScene(0);
+        });
     }
 
     /// <summary>
@@ -77,5 +102,13 @@ public class GUI : MonoBehaviour
                 Panel.text = "Win! ->";
                 break;
         }
+    }
+
+    /// <summary>
+    /// Load menu
+    /// </summary>
+    public void ToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

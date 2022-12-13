@@ -26,11 +26,14 @@ public class Player : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // Move player up
         if (Input.GetKey(KeyUp))
         {
             if (!(transform.position.y >= MaxHeight))
                 transform.position = new Vector2(transform.position.x, transform.position.y + PlayerSpeed);
         }
+
+        // Move player down
         else if (Input.GetKey(KeyDown))
         {
             if(!(transform.position.y <= MinHeight))

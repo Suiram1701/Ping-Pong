@@ -27,6 +27,9 @@ public class Ball : MonoBehaviour
 
         // Start at position zero
         transform.position = new Vector2(0, 0);
+
+        // Set start speed
+        Speed = 0.2f;
     }
 
     /// <summary>
@@ -68,10 +71,15 @@ public class Ball : MonoBehaviour
     private void Bounce(bool Horizontal)
     {
         if (Horizontal)            // Bounce from left to right (or reverse)
+        {
             isRight = !isRight;
+            Speed = 0.4f;
+        }
+
         else                       // Bounce from top to bottom (or reverse)
             isTop = !isTop;
 
+        // Random move direction
         Direction = UnityEngine.Random.Range(Direction >= 0.45f ? 0.8f : 1f, Direction <= 0.90 ? 1.2f : 1f) * Direction;
         Debug.Log(Direction);
     }
