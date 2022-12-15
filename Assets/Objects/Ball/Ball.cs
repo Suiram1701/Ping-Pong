@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     public float Speed;
     private float Direction = 1f;
     private bool isRight = true;
-    private bool isTop = false;
+    public bool isTop = false;
 
     /// <summary>
     /// Start is called before the first frame update
@@ -29,7 +29,7 @@ public class Ball : MonoBehaviour
         transform.position = new Vector2(0, 0);
 
         // Set start speed
-        Speed = 0.2f;
+        Speed = 15f;
     }
 
     /// <summary>
@@ -38,8 +38,8 @@ public class Ball : MonoBehaviour
     private void Update()
     {
         // Move ball
-        transform.position = new Vector2((transform.position.x + (isRight ? Speed : - Speed) * Direction), transform.position.y);
-        transform.position = new Vector2(transform.position.x, transform.position.y + (isTop ? (Speed - Speed * Direction) : - (Speed - Speed * Direction)));
+        transform.position = new Vector2(transform.position.x + ((isRight ? Speed : - Speed) * Direction) * Time.deltaTime, transform.position.y);
+        transform.position = new Vector2(transform.position.x, transform.position.y + (isTop ? (Speed - Speed * Direction) : - (Speed - Speed * Direction)) * Time.deltaTime);
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ public class Ball : MonoBehaviour
         if (Horizontal)            // Bounce from left to right (or reverse)
         {
             isRight = !isRight;
-            Speed = 0.4f;
+            Speed = 30f;
         }
 
         else                       // Bounce from top to bottom (or reverse)
@@ -81,6 +81,6 @@ public class Ball : MonoBehaviour
 
         // Random move direction
         Direction = UnityEngine.Random.Range(Direction >= 0.45f ? 0.8f : 1f, Direction <= 0.90 ? 1.2f : 1f) * Direction;
-        Debug.Log(Direction);
+        //Debug.Log(Direction);
     }
 }
