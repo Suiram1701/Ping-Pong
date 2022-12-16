@@ -1573,7 +1573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 1283292364}
-  isAI: 1
+  isAI: 0
   AITolerence: 1
   PlayerSpeed: 15
   KeyUp: 273

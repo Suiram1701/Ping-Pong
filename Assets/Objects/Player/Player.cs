@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class Player : MonoBehaviour
 {
@@ -26,6 +25,9 @@ public class Player : MonoBehaviour
     {
         // Set to start position
         transform.position = new Vector2(transform.position.x, 0);
+
+        // Check if AI is enabled
+        isAI = gameObject.name == "PlayerLeft" ? AISettings.AILeftEnable : AISettings.AIRightEnable;
     }
 
     /// <summary>
@@ -81,17 +83,19 @@ public class Player : MonoBehaviour
             Debug.Log("AI0");
             return 0;
         }*/
-        if (ballPos.y < paddlePos.y)
+        if (!(ballPos.y < paddlePos.y + AITolerence))
         {
             Debug.Log("AI1");
             return 1;
         }
-        else if (ballPos.y > paddlePos.y)
+        else if (!(ballPos.y > paddlePos.y + AITolerence))
         {
             Debug.Log("AI-1");
             return -1;
         }
-
-        return 0;
+        else {
+            Debug.Log("AI0");
+            return 0;
+        }
     }
 }

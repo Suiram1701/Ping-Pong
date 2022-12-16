@@ -42,9 +42,9 @@ public class GUI : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             Panel.text = Menu ? "Pause" : "";
-            Ball.Speed = Menu ? 0f : 0.4f;
-            Pl1.PlayerSpeed = Menu ? 0f : 0.25f;
-            Pl2.PlayerSpeed = Menu ? 0f : 0.25f;
+            Ball.Speed = Menu ? 0f : 30f;
+            Pl1.PlayerSpeed = Menu ? 0f : 15f;
+            Pl2.PlayerSpeed = Menu ? 0f : 15f;
             MenuBtn.gameObject.SetActive(Menu);
             Menu = !Menu;
         }
